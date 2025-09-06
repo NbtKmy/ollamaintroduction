@@ -6,6 +6,8 @@ Auf diese Weise kann man ein neues Modell in Ollama ausprobieren.
 
 [gemma3:4b](https://ollama.com/library/gemma3:4b) gibt es bereits für Ollama. Aber dies ist durch Q4_K_M quantifiziert. Wenn man z.B. mit einem anderen Algorhythmen wie Q8_0 oder Q5_K_M quantifiziert, kann man noch bessere Ergebnisse erwarten.
 
+__Beispiel__: https://huggingface.co/nkamiy/gemma3-4b-it-gguf
+
 ## How to
 
 ### 1. Zuerst das Modell holen:
