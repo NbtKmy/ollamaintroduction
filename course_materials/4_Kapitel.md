@@ -8,6 +8,8 @@ Auf diese Weise kann man ein neues Modell in Ollama ausprobieren.
 
 __Beispiel__: https://huggingface.co/nkamiy/gemma3-4b-it-gguf
 
+...[Apertus](https://huggingface.co/swiss-ai/Apertus-8B-Instruct-2509) wäre hier interessant gewesen, aber das Model ApertusForCausalLM ist in Moment nicht durch llama.cpp bearbeitet werden (s. [link](https://github.com/ggml-org/llama.cpp/issues/15751?utm_source=chatgpt.com)). (Stand: 2025-09-06)
+
 ## How to
 
 ### 1. Zuerst das Modell holen:
