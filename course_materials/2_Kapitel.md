@@ -50,7 +50,21 @@ Beispiel:
 - Eine App ausprobieren: https://github.com/NbtKmy/ollama-spielwiese
 - LLM in OpenRefine verwenden
 
+### Die App ausprobieren
+
+1. In Ollama ein LLM und ein Embedding-Modell installieren
+2. Die App installieren
+3. Alles weitere zeigt der Dozent
+
 ### LLM in OpenRefine
+
+Es gibt 2 Möglichkeiten:
+1. LLM-Extension verwenden
+2. Python-Code schreiben
+
+Wir sehen beide Methode an.
+
+#### LLM-Extension verwenden
 
 Hier verwenden wir [LLM-Extention](https://github.com/sunilnatraj/llm-extension).
 
@@ -71,3 +85,60 @@ Hier verwenden wir [LLM-Extention](https://github.com/sunilnatraj/llm-extension)
 Create JSON object from the description. Properties should include "name", "birth_date (YYYY-MM-DD)", "death_date (YYYY-MM-DD)", "themes_and_motifs".
 ```
 
+### Python-Code schreiben
+
+1. Schreib einen Python-Code, durch den Ollama-API abgefragt wird.
+
+```python
+#  This code is originally created by MichaelMarkert
+# https://github.com/MichaelMarkert/SODa/blob/main/OR-LLM-Script.py
+
+
+import json
+import urllib2
+
+
+Basisprompt = u"Generate a basic JSON containing only the following information on the person mentioned: dateofbirth, placeofbirth, dateofdeath, placeofdeath. Do not provide further information."
+
+url = "http://localhost:11434/api/chat"
+
+headers = {
+    'accept': 'application/json',
+    'Content-Type': 'application/json'
+}
+
+data = {
+    "messages": [
+        {
+            "content": Basisprompt,
+            "role": "system"
+        },
+        {
+            "content": value,
+            "role": "user"
+        }
+    ],
+    "model": "mistral:latest",
+    "stream": False,
+    "max_tokens": 2048,
+    "temperature": 0.3,
+    "top_p": 0.95
+}
+
+data_string = json.dumps(data, ensure_ascii=False)
+data_bytes = data_string.encode('utf-8')
+
+req = urllib2.Request(url, data=data_bytes, headers=headers)
+
+response = urllib2.urlopen(req)
+response_bytes = response.read()
+response_json = json.loads(response_bytes.decode('utf-8'))
+content = response_json["message"]["content"]
+
+return content
+```
+
+2. Öffne die Datei in OpenRefine und erstelle das Projekt
+3. Klicke ein Menü-Pfile von einer Spalte, die du durch LLM analysieren lassen willst
+4. Wähle `edit column > add column based this column` => Ein Popup-Fenster taucht auf
+5. In dem Popup-Fenster entsprechende Information ausfüllen und los!

@@ -106,3 +106,48 @@ Um die Konfiguration zu ändern, gibt es zwei Möglichkeiten. Eine Möglichkeit 
 
 Hier probieren wir die 2. Methode aus, yey!
 
+### Die Konfiguration eines Modells ändern
+
+...Um unser Leben einfacher zu machen, nehmen wir eins aus den folngenden Modellen:
+
+
+- Llama (including Llama 2, Llama 3, Llama 3.1, and Llama 3.2)
+- Mistral (including Mistral 1, Mistral 2, and Mixtral)
+- Gemma (including Gemma 1 and Gemma 2)
+- Phi3
+
+In diesem Beispiel nehme ich `mistral:latest`, weil ich es zufällig schon installiert habe.
+
+Schauen wir zuerst die jetzige Konfiguration. Tipp den folgenden Befehl in Terminal:
+
+```bash
+ollama show --modelfile mistral:latest
+```
+Dann sieht man, wie mistral jetzt konfiguriert ist...
+
+Auf dem Basis dieser Information erstellen wir zuerst ein neues `Modelfile`.
+Dort kann man unterschiedliche Parameters und System-Prompt bestimmen.
+
+[Diese Seite](https://github.com/ollama/ollama/blob/main/docs/modelfile.md) ist noch dazu hilfreich.
+
+Wir können hier als Beispiel ein vorhandenes Modelfile erweitern. 
+Kopieren wir den Inhalt des Modelfiles, was wir gerade gesehen haben.
+Dann erweitern wir den Inhalt. Zum Beispiel so...:
+
+```
+PARAMETER temperature 0.3
+PARAMETER seed 1234
+
+SYSTEM """Du bist ein gestiefelter Kater, der sehr höflich und freundlich ist. Du sagst immer 'Miau' am Ende deiner Antwort."""
+```
+
+Wenn du das Modelfile gespeichert hast, kannst du jetzt den folgenden Befehl ausführen:
+```
+$ ollama create [Name deines neuen konfigurierten Modells] -f [Pfad zu deinem Modelfile]
+```
+
+Wenn es gut läuft, ist das neu konfigurierte Modell als verfügbares Modell aufgelistet.
+
+
+
+

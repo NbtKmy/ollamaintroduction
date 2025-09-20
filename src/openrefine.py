@@ -1,4 +1,4 @@
-#  This code is created by MichaelMarkert
+#  This code is originally created by MichaelMarkert
 # https://github.com/MichaelMarkert/SODa/blob/main/OR-LLM-Script.py
 
 

@@ -1,111 +1,35 @@
-# 4. Kapitel - GGUF selber erstellen und verwenden
+# 4. Kapitel - Unterschiedliche Modelle Verwenden
 
-## Warum selber GGUF erstellen?
-Wenn ein Basemodel (oder andere Modelle wie Instruct-Model usw.) da ist, kann man daraus selber ein GGUF-File erstellen und für Ollama anwendbar machen.
-Auf diese Weise kann man ein neues Modell in Ollama ausprobieren.
+Ollama bietet eine Menge KI-Modelle auf [ihrer offiziellen Website](https://ollama.com/search). Aber es gibt unzählige Modelle auf der Welt(!!) und man möchte sie doch verwenden - Klar, das kann man!
 
-[gemma3:4b](https://ollama.com/library/gemma3:4b) gibt es bereits für Ollama. Aber dies ist durch Q4_K_M quantifiziert. Wenn man z.B. mit einem anderen Algorhythmen wie Q8_0 oder Q5_K_M quantifiziert, kann man noch bessere Ergebnisse erwarten.
+## Modelle auf Huggingface
 
-__Beispiel__: https://huggingface.co/nkamiy/gemma3-4b-it-gguf
+[Huggingface](https://huggingface.co/) eine Plattform, die Entwicklern und Forschern hilft, KI-Modelle für Texte zu nutzen. Der zentrale Punkt ist der "Model Hub", in dem tausende vortrainierte Modelle für verschiedene Aufgaben verfügbar sind. 
+Die Modelle sind, wie bei Github, durch Repositorien, zur Verfügung gestellt.
 
-...[Apertus](https://huggingface.co/swiss-ai/Apertus-8B-Instruct-2509) wäre hier interessant gewesen, aber das Model ApertusForCausalLM ist in Moment nicht durch llama.cpp bearbeitet werden (s. [link](https://github.com/ggml-org/llama.cpp/issues/15751?utm_source=chatgpt.com)). (Stand: 2025-09-06)
+Wir lernen hier die Plattform ein wenig kennen. 
 
-## How to
+Wir besuchen diese Seite jetzt: https://huggingface.co/google/gemma-3-4b-it
 
-### 1. Zuerst das Modell holen:
+Quiz:
 
-```python
+- Könnt ihr sagen, was für eine Seite ist?
+- Ist das Modell hier auf dieser Seite für Ollama anwendbar?
 
-from dotenv import load_dotenv
-import os
-from pathlib import Path
-from huggingface_hub import snapshot_download
+...Okay, dann guckt mal diese Seite: https://huggingface.co/nkamiy/gemma3-4b-it-gguf
 
+Quiz:
 
-load_dotenv()
-token = os.getenv("HUGGINGFACE_TOKEN")
+- Könnt ihr sagen, was für eine Seite ist?
+- Ist das Modell hier auf dieser Seite für Ollama anwendbar?
+- Wer hat das Modell kreiert?
 
-project_root = Path(__file__).resolve().parents[1]
-local_dir = project_root / "model" # So wird das Modell unter dem Ordner "model" heruntergeladen
-local_dir.mkdir(parents=True, exist_ok=True)
-
-snapshot_download(
-    repo_id="google/gemma-3-4b-it",
-    local_dir=local_dir,
-    token=token,
-    local_dir_use_symlinks=False,
-)
-
-```
-
-### 2. [llama.cpp](https://github.com/ggml-org/llama.cpp/tree/master) holen
-
-```bash
-git clone https://github.com/ggml-org/llama.cpp.git
-```
-
-Und die notwendigen packages für `convert_hf_to_gguf.py`installieren.
-Dann den folgenden Befehl ausführen:
-
-```bash
-
-# Vom Modell zu f16 GGUF
-python [your folder for llama.cpp]/llama.cpp/convert_hf_to_gguf.py \
-  --outtype f16 \
-  --outfile ./gguf/gemma3-4b-it-f16.gguf \
-  [your goal folder]
-
-# Wenn man die Funktion, Image-Text-To-Text, beibehaltne will:
-python [your folder for llama.cpp]/llama.cpp/convert_hf_to_gguf.py \
-  --mmproj \
-  --outfile ./gguf/gemma3-4b-it-mmproj.gguf \
-  [your goal folder]
-
-````
-
-### 3. llama.cpp bilden
-
-```bash
-[cd llama.cpp-folder]
-
-cmake -B build
-cmake --build build --config Release -j
-
-# Checking the build binary
-./build/bin/llama-cli -h
-
-```
-
-### 4. Create a GGUF file
-
-```bash
-[your llama.cpp/llama.cpp/build/bin/llama-quantize \   # we use llama-quantize
-  ./gemma3-4b-it-f16.gguf \      # f16-GGUF you created just now 
-  ./gemma3-4b-it-Q5_K_M.gguf \   # We create a Q5_K_M 
-  Q5_K_M
-
-```
-
-### 5. Ein Modelfile schreiben
-
-Wie dies: 
-```text
-FROM ./gemma3-4b-it-Q5_K_M.gguf
-FROM ./gemma3-4b-it-mmproj.gguf
-
-PARAMETER temperature 0.7
-```
-
-Dann dies spiechern.
-
-### 6. In Ollama eintragen
-
-```bash
-ollama create gemma3-4b-q5km -f Modelfile
-```
+Okay, das Modell wollen wir verwenden. Der Dozent zeigt wie...
 
 
 
+## Quantisierung
 
+Es gibt eine Software [llama.cpp](https://github.com/ggml-org/llama.cpp/tree/master), mit der man ein LLM quantisieren kann. Auf dieser Weise können wir viele grosse Modelle für einen Rechner mit der schwachen Rechnungsleistung zur Verfügung stellen.
 
-
+In dem nächsten Kapitel wird der konkrete Prozess gezeigt.
