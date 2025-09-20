@@ -81,7 +81,7 @@ cmake --build build --config Release -j
 ```bash
 [your llama.cpp/llama.cpp/build/bin/llama-quantize \   # we use llama-quantize
   ./gemma3-4b-it-f16.gguf \      # f16-GGUF you created just now 
-  ./gemma3-4b-it.Q5_K_M.gguf \   # We create a Q5_K_M 
+  ./gemma3-4b-it-Q5_K_M.gguf \   # We create a Q5_K_M 
   Q5_K_M
 
 ```
@@ -90,7 +90,7 @@ cmake --build build --config Release -j
 
 Wie dies: 
 ```text
-FROM ./gemma3-4b-it.Q5_K_M.gguf
+FROM ./gemma3-4b-it-Q5_K_M.gguf
 FROM ./gemma3-4b-it-mmproj.gguf
 
 PARAMETER temperature 0.7
