@@ -49,6 +49,7 @@ Weil man damit eine neue Applikation erstellen kann und dadurch viel flexibler d
 Beispiel: 
 - Eine App ausprobieren: https://github.com/NbtKmy/ollama-spielwiese
 - LLM in OpenRefine verwenden
+- Local Deep Researcher: https://github.com/langchain-ai/local-deep-researcher
 
 ### Die App ausprobieren
 
@@ -142,3 +143,14 @@ return content
 3. Klicke ein Menü-Pfile von einer Spalte, die du durch LLM analysieren lassen willst
 4. Wähle `edit column > add column based this column` => Ein Popup-Fenster taucht auf
 5. In dem Popup-Fenster entsprechende Information ausfüllen und los!
+
+
+### Local Deep Researcher 
+
+Demo 
+
+```bash
+cd ollama-deep-researcher
+source .venv/bin/activate
+uvx --refresh --from "langgraph-cli[inmem]" --with-editable . --python 3.11 langgraph dev
+```
