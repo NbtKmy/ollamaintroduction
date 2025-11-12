@@ -7,9 +7,10 @@ Ollama bietet eine Menge KI-Modelle auf [ihrer offiziellen Website](https://olla
 [Huggingface](https://huggingface.co/) eine Plattform, die Entwicklern und Forschern hilft, KI-Modelle für Texte zu nutzen. Der zentrale Punkt ist der "Model Hub", in dem tausende vortrainierte Modelle für verschiedene Aufgaben verfügbar sind. 
 Die Modelle sind, wie bei Github, durch Repositorien, zur Verfügung gestellt.
 
-Wir lernen hier die Plattform ein wenig kennen. 
+Wir lernen hier die Plattform ein wenig kennen.
 
 Wir besuchen diese Seite jetzt: https://huggingface.co/google/gemma-3-4b-it
+(Falls jemand genug RAM & Speicherplatz hat, kann man natürlich auch andere Modelle installieren, z.B. [Apertus (quantisiert durch unsloth)](https://huggingface.co/unsloth/Apertus-8B-Instruct-2509-GGUF))
 
 Quiz:
 

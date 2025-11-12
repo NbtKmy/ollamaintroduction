@@ -154,3 +154,8 @@ cd ollama-deep-researcher
 source .venv/bin/activate
 uvx --refresh --from "langgraph-cli[inmem]" --with-editable . --python 3.11 langgraph dev
 ```
+
+### Ollama Search (selbst erstelle App)
+
+https://github.com/NbtKmy/ollama_search
+
