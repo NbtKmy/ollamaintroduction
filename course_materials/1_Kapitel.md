@@ -128,7 +128,7 @@ Dann sieht man, wie mistral jetzt konfiguriert ist...
 Auf dem Basis dieser Information erstellen wir zuerst ein neues `Modelfile`.
 Dort kann man unterschiedliche Parameters und System-Prompt bestimmen.
 
-[Diese Seite](https://github.com/ollama/ollama/blob/main/docs/modelfile.md) ist noch dazu hilfreich.
+[Diese Seite](https://docs.ollama.com/modelfile) ist noch dazu hilfreich.
 
 Wir können hier als Beispiel ein vorhandenes Modelfile erweitern. 
 Kopieren wir den Inhalt des Modelfiles, was wir gerade gesehen haben.
